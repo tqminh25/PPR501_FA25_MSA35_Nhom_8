@@ -1,0 +1,40 @@
+
+## **Đề chung:** Xây dựng website quản lý sinh viên
+- Mỗi sinh viên có thông tin: mã số sinh viên, họ, tên, email, ngày sinh, quê quán, điểm Toán, điểm Văn, điểm tiếng Anh.
+- Website có các chức năng thêm, sữa, xóa.
+- Hiền thị thông tin tất cả sinh viên.
+- Thông tin sinh viên có thể thiếu khi nhập, nhập thông tin của 100 sinh viên.
+- Các thông tin về FE và BE:  
+    BE: FastAPI
+    FЕ3: Desktop App (Python trên MacOS)
+    Tiền xử lí dữ liệu: Pandas
+    
+
+## **Đề riêng thêm của mỗi nhóm (Đề 8 nhóm 8 (FE3))**
+- Api (từng sinh viên) trả về thông tin sinh viên json
+- Chương trình crawl dữ liệu sử dụng API.
+- Lưu trữ dữ liệu vào text file.
+- Làm sạch dữ liệu, đưa ra các phân tích so sánh điểm tiếng Anh/Toán, quê quán/tiếng Anh.
+
+
+
+##** Thực hiện:
+1. Chạy BE:
+source .venv/bin/activate
+uvicorn backend.app.main:app --reload
+Mở trình duyệt → http://127.0.0.1:8000/docs (Swagger UI) để thử GET/POST/PUT/DELETE
+Có thể test API “từng sinh viên” trả về JSON luôn
+
+2. Chạy FE (Desktop App (Tkinter)):
+source .venv/bin/activate
+python desktop/main_gui.py
+
+
+3. Crawl dữ liệu qua API + lưu file text
+source .venv/bin/activate
+python scripts/crawl_students.py
+
+
+4. Làm sạch dữ liệu & phân tích (English vs Math, Hometown vs English)
+source .venv/bin/activate
+python scripts/analyze_students.py
