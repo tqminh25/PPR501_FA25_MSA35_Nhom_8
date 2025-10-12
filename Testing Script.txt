@@ -17,7 +17,6 @@
 - Làm sạch dữ liệu, đưa ra các phân tích so sánh điểm tiếng Anh/Toán, quê quán/tiếng Anh.
 
 
-
 ##** Thực hiện:
 1. Chạy BE:
 source .venv/bin/activate

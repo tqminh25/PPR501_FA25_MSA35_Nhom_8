@@ -1,0 +1,17 @@
+# Crawl time: 2025-10-08T19:43:48.175004
+# Total: 14
+
+[id=1] 194600 | Ta Quang Minh | email=tqminh25@gmail.com | dob=1991-09-25 | home_town=HaNoi | math=10.0 | lit=10.0 | eng=10.0
+[id=2] 194601 | Nguyen Thuy Duong | email=duong.nguyenthuy@gmail.com | dob=1993-12-18 | home_town=HaNoi | math=8.0 | lit=10.0 | eng=10.0
+[id=3] 194602 | Nguyen Quang Vinh | email=nqvinh15@gmail.com | dob=1991-07-15 | home_town=HaNoi | math=8.0 | lit=10.0 | eng=9.0
+[id=4] 194603 | Ngo Thuy Linh | email=linhngo@gmail.com | dob=1994-11-08 | home_town=HaNoi | math=9.0 | lit=8.0 | eng=10.0
+[id=5] 194604 | Mau Van Dung | email=maudung@gmail.com | dob=1991-08-12 | home_town=Quang Binh | math=7.0 | lit=6.0 | eng=9.0
+[id=6] 194605 | Nguyen Duc Manh | email=dmanh@gmail.com | dob=1991-01-15 | home_town=Quang Ninh | math=6.0 | lit=8.0 | eng=8.0
+[id=7] 194606 | Nguyen Van Quyet | email=vanquyet@gmail.com | dob=1991-04-14 | home_town=Hai Phong | math=8.0 | lit=8.0 | eng=6.0
+[id=8] 194607 | Nguyen Quang Trong | email=qtrong@gmail.com | dob=1991-06-05 | home_town=Hai Duong | math=5.0 | lit=7.0 | eng=7.0
+[id=9] 194608 | Nguyen Hang Hai | email=hainguyen@gmail.com | dob=1991-05-05 | home_town=Nam Dinh | math=10.0 | lit=9.0 | eng=6.0
+[id=10] 194609 | Do Khoa Tu | email=tudo@gmail.com | dob=1991-10-11 | home_town=Tuyen Quang | math=6.0 | lit=8.0 | eng=7.0
+[id=11] 194610 | Bui Van Hai | email=vanhai@gmail.com | dob=1991-11-04 | home_town=Lang Son | math=5.0 | lit=8.0 | eng=8.0
+[id=12] 194611 | Nguyen Hoang Nam | email=namhoang@gmail.com | dob=1990-12-25 | home_town=Bac Kan | math=8.0 | lit=9.0 | eng=9.0
+[id=13] 194612 | Bui Mai Phuong | email=buiphuong@gmail.com | dob=1991-01-01 | home_town=Ha Noi | math=9.0 | lit=9.0 | eng=7.0
+[id=14] 194613 | Nguyen Phan Binh | email=binhnguyen@gmail.com | dob=1992-12-25 | home_town=HaNoi | math=10.0 | lit=9.0 | eng=9.0
