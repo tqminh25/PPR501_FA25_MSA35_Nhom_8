@@ -1,17 +1,133 @@
-# Crawl time: 2025-10-08T19:43:48.175004
-# Total: 14
+# Crawl time: 2025-10-12T15:52:29.491251
+# Total: 130
 
-[id=1] 194600 | Ta Quang Minh | email=tqminh25@gmail.com | dob=1991-09-25 | home_town=HaNoi | math=10.0 | lit=10.0 | eng=10.0
-[id=2] 194601 | Nguyen Thuy Duong | email=duong.nguyenthuy@gmail.com | dob=1993-12-18 | home_town=HaNoi | math=8.0 | lit=10.0 | eng=10.0
-[id=3] 194602 | Nguyen Quang Vinh | email=nqvinh15@gmail.com | dob=1991-07-15 | home_town=HaNoi | math=8.0 | lit=10.0 | eng=9.0
-[id=4] 194603 | Ngo Thuy Linh | email=linhngo@gmail.com | dob=1994-11-08 | home_town=HaNoi | math=9.0 | lit=8.0 | eng=10.0
-[id=5] 194604 | Mau Van Dung | email=maudung@gmail.com | dob=1991-08-12 | home_town=Quang Binh | math=7.0 | lit=6.0 | eng=9.0
-[id=6] 194605 | Nguyen Duc Manh | email=dmanh@gmail.com | dob=1991-01-15 | home_town=Quang Ninh | math=6.0 | lit=8.0 | eng=8.0
-[id=7] 194606 | Nguyen Van Quyet | email=vanquyet@gmail.com | dob=1991-04-14 | home_town=Hai Phong | math=8.0 | lit=8.0 | eng=6.0
-[id=8] 194607 | Nguyen Quang Trong | email=qtrong@gmail.com | dob=1991-06-05 | home_town=Hai Duong | math=5.0 | lit=7.0 | eng=7.0
-[id=9] 194608 | Nguyen Hang Hai | email=hainguyen@gmail.com | dob=1991-05-05 | home_town=Nam Dinh | math=10.0 | lit=9.0 | eng=6.0
-[id=10] 194609 | Do Khoa Tu | email=tudo@gmail.com | dob=1991-10-11 | home_town=Tuyen Quang | math=6.0 | lit=8.0 | eng=7.0
-[id=11] 194610 | Bui Van Hai | email=vanhai@gmail.com | dob=1991-11-04 | home_town=Lang Son | math=5.0 | lit=8.0 | eng=8.0
-[id=12] 194611 | Nguyen Hoang Nam | email=namhoang@gmail.com | dob=1990-12-25 | home_town=Bac Kan | math=8.0 | lit=9.0 | eng=9.0
-[id=13] 194612 | Bui Mai Phuong | email=buiphuong@gmail.com | dob=1991-01-01 | home_town=Ha Noi | math=9.0 | lit=9.0 | eng=7.0
-[id=14] 194613 | Nguyen Phan Binh | email=binhnguyen@gmail.com | dob=1992-12-25 | home_town=HaNoi | math=10.0 | lit=9.0 | eng=9.0
+[id=1] 94600 | Tran Ha | email=ha.tran13@gmail.com | dob=2005-03-20 | home_town=BacNinh | math=6.4 | lit=6.1 | eng=3.2
+[id=2] 194601 | Ngo Ha | email=ha.ngo79@gmail.com | dob=2000-09-21 | home_town=HCM | math=8.0 | lit=5.2 | eng=8.2
+[id=3] 194602 | Dang Trang | email=trang.dang87@gmail.com | dob=1999-12-28 | home_town=HaNoi | math=7.8 | lit=8.6 | eng=8.8
+[id=4] 194603 | Pham Linh | email=linh.pham67@gmail.com | dob=2006-01-31 | home_town=QuangNinh | math=6.4 | lit=9.3 | eng=3.4
+[id=5] 194604 | Ngo Huy | email=huy.ngo64@gmail.com | dob=2002-02-12 | home_town=NgheAn | math=6.4 | lit=6.1 | eng=6.6
+[id=6] 194605 | Tran Anh | email=anh.tran58@gmail.com | dob=2001-11-10 | home_town=HCM | math=6.8 | lit=6.7 | eng=8.1
+[id=7] 194606 | Ngo Minh | email=minh.ngo68@gmail.com | dob=2001-09-04 | home_town=NamDinh | math=5.6 | lit=9.6 | eng=5.1
+[id=8] 194607 | Ly Dung | email=dung.ly90@gmail.com | dob=2000-12-18 | home_town=QuangNinh | math=9.4 | lit=6.8 | eng=4.3
+[id=9] 194608 | Nguyen Anh | email=anh.nguyen94@gmail.com | dob=2006-01-16 | home_town=HaiPhong | math=8.9 | lit=9.9 | eng=9.7
+[id=10] 194609 | Tran My | email=my.tran58@gmail.com | dob=2000-08-25 | home_town=CanTho | math=7.3 | lit=9.2 | eng=8.3
+[id=11] 194610 | Pham Thao | email=thao.pham95@gmail.com | dob=2005-07-14 | home_town=CanTho | math=8.5 | lit=8.4 | eng=8.7
+[id=12] 194611 | Le Ha | email=ha.le78@gmail.com | dob=2006-01-29 | home_town=BacNinh | math=6.2 | lit=7.3 | eng=4.3
+[id=13] 194612 | Do Duc | email=duc.do98@gmail.com | dob=2007-05-14 | home_town=NamDinh | math=6.1 | lit=6.6 | eng=4.0
+[id=14] 194613 | Pham Minh | email=minh.pham14@gmail.com | dob=2004-06-01 | home_town=BacGiang | math=6.6 | lit=6.3 | eng=3.0
+[id=15] 194614 | Truong Quang | email=quang.truong50@gmail.com | dob=2000-07-08 | home_town=HaiPhong | math=8.3 | lit=7.0 | eng=8.9
+[id=16] 194615 | Le Nam | email=nam.le43@gmail.com | dob=2004-10-19 | home_town=DaNang | math=6.2 | lit=7.8 | eng=8.2
+[id=17] 194616 | Phan Quang | email=quang.phan84@gmail.com | dob=2003-05-14 | home_town=ThanhHoa | math=6.8 | lit=10.0 | eng=5.4
+[id=18] 194617 | Tran Nam | email=nam.tran16@gmail.com | dob=2000-01-18 | home_town=LamDong | math=5.5 | lit=8.1 | eng=3.3
+[id=19] 194618 | Bui Linh | email=linh.bui18@gmail.com | dob=2000-01-12 | home_town=ThanhHoa | math=6.9 | lit=10.0 | eng=4.3
+[id=20] 194619 | Ly Phuong | email=phuong.ly11@gmail.com | dob=2000-07-29 | home_town=Hue | math=8.6 | lit=8.4 | eng=8.9
+[id=21] 194620 | Duong Dung | email=dung.duong92@gmail.com | dob=2001-08-21 | home_town=NgheAn | math=5.6 | lit=7.2 | eng=6.6
+[id=22] 194621 | Truong Khanh | email=khanh.truong43@gmail.com | dob=2001-10-03 | home_town=NamDinh | math=8.8 | lit=7.5 | eng=3.4
+[id=23] 194622 | Hoang Ha | email=ha.hoang91@gmail.com | dob=2004-01-29 | home_town=NamDinh | math=8.0 | lit=5.8 | eng=3.6
+[id=24] 194623 | Duong Phuong | email=phuong.duong77@gmail.com | dob=2004-11-24 | home_town=BinhDuong | math=5.0 | lit=6.6 | eng=6.2
+[id=25] 194624 | Huynh Duc | email=duc.huynh49@gmail.com | dob=2000-01-02 | home_town=HaiPhong | math=5.3 | lit=9.4 | eng=8.0
+[id=26] 194625 | Ngo Anh | email=anh.ngo72@gmail.com | dob=2004-07-20 | home_town=LamDong | math=5.3 | lit=8.8 | eng=6.6
+[id=27] 194626 | Do Huy | email=huy.do70@gmail.com | dob=2001-06-20 | home_town=NamDinh | math=5.8 | lit=7.6 | eng=5.3
+[id=28] 194627 | Truong Trang | email=trang.truong79@gmail.com | dob=2005-11-13 | home_town=BacGiang | math=8.6 | lit=6.0 | eng=4.1
+[id=29] 194628 | Do Ha | email=ha.do57@gmail.com | dob=2005-04-22 | home_town=ThaiBinh | math=9.5 | lit=7.3 | eng=6.4
+[id=30] 194629 | Huynh Anh | email=anh.huynh12@gmail.com | dob=2005-09-28 | home_town=QuangNinh | math=7.8 | lit=7.9 | eng=6.1
+[id=31] 194630 | Do Khanh | email=khanh.do17@gmail.com | dob=2004-05-31 | home_town=HaiPhong | math=5.3 | lit=5.2 | eng=8.7
+[id=32] 194631 | Pham Phuong | email=phuong.pham45@gmail.com | dob=2003-05-07 | home_town=Hue | math=7.4 | lit=7.7 | eng=9.6
+[id=33] 194632 | Bui Duc | email=duc.bui83@gmail.com | dob=2001-08-26 | home_town=ThaiBinh | math=6.2 | lit=7.4 | eng=3.8
+[id=34] 194633 | Tran Anh | email=anh.tran94@gmail.com | dob=2003-08-07 | home_town=ThanhHoa | math=6.8 | lit=7.1 | eng=5.4
+[id=35] 194634 | Do Minh | email=minh.do93@gmail.com | dob=2004-10-15 | home_town=Hue | math=5.5 | lit=7.0 | eng=9.1
+[id=36] 194635 | Tran My | email=my.tran41@gmail.com | dob=2002-02-22 | home_town=HaiPhong | math=6.0 | lit=7.2 | eng=9.6
+[id=37] 194636 | Vu Dung | email=dung.vu41@gmail.com | dob=2006-08-30 | home_town=LamDong | math=9.6 | lit=7.2 | eng=4.3
+[id=38] 194637 | Tran Phuong | email=phuong.tran16@gmail.com | dob=2007-03-04 | home_town=Hue | math=10.0 | lit=9.2 | eng=8.8
+[id=39] 194638 | Duong Duc | email=duc.duong40@gmail.com | dob=1999-11-01 | home_town=DaNang | math=7.0 | lit=7.4 | eng=9.5
+[id=40] 194639 | Nguyen Duc | email=duc.nguyen31@gmail.com | dob=2006-03-26 | home_town=ThanhHoa | math=5.0 | lit=7.0 | eng=5.1
+[id=41] 194640 | Vu Tuan | email=tuan.vu46@gmail.com | dob=2006-08-19 | home_town=ThanhHoa | math=8.5 | lit=8.7 | eng=5.7
+[id=42] 194641 | Ngo Ha | email=ha.ngo72@gmail.com | dob=2001-02-19 | home_town=DaNang | math=5.9 | lit=6.1 | eng=9.3
+[id=43] 194642 | Dang Khanh | email=khanh.dang17@gmail.com | dob=2005-09-19 | home_town=BacNinh | math=6.6 | lit=5.3 | eng=5.7
+[id=44] 194643 | Ly Duc | email=duc.ly77@gmail.com | dob=2003-05-17 | home_town=DaNang | math=5.3 | lit=7.5 | eng=9.8
+[id=45] 194644 | Bui Anh | email=anh.bui18@gmail.com | dob=2002-09-03 | home_town=Hue | math=9.3 | lit=7.0 | eng=9.0
+[id=46] 194645 | Pham Quang | email=quang.pham84@gmail.com | dob=2002-02-21 | home_town=QuangNinh | math=5.2 | lit=5.4 | eng=5.7
+[id=47] 194646 | Dang Quang | email=quang.dang50@gmail.com | dob=2001-02-06 | home_town=BinhDuong | math=6.3 | lit=8.3 | eng=4.5
+[id=48] 194647 | Phan Dung | email=dung.phan26@gmail.com | dob=2001-08-10 | home_town=Hue | math=8.2 | lit=7.3 | eng=8.1
+[id=49] 194648 | Tran Duc | email=duc.tran11@gmail.com | dob=2006-04-10 | home_town=ThaiBinh | math=8.1 | lit=7.8 | eng=6.0
+[id=50] 194649 | Pham Phuong | email=phuong.pham74@gmail.com | dob=2002-08-22 | home_town=CanTho | math=5.7 | lit=6.7 | eng=8.4
+[id=51] 194650 | Huynh Trang | email=trang.huynh46@gmail.com | dob=2000-08-24 | home_town=DaNang | math=7.2 | lit=7.7 | eng=9.6
+[id=52] 194651 | Do Tuan | email=tuan.do77@gmail.com | dob=2000-07-26 | home_town=HaNoi | math=8.3 | lit=7.8 | eng=9.8
+[id=53] 194652 | Truong Anh | email=anh.truong27@gmail.com | dob=2003-01-04 | home_town=CanTho | math=5.6 | lit=5.5 | eng=9.3
+[id=54] 194653 | Hoang Dung | email=dung.hoang87@gmail.com | dob=2000-08-07 | home_town=HaiPhong | math=8.6 | lit=6.0 | eng=8.3
+[id=55] 194654 | Dang Dung | email=dung.dang72@gmail.com | dob=2002-10-31 | home_town=CanTho | math=9.5 | lit=9.2 | eng=8.7
+[id=56] 194655 | Ly Linh | email=linh.ly45@gmail.com | dob=2006-12-27 | home_town=HaNoi | math=5.0 | lit=8.9 | eng=8.8
+[id=57] 194656 | Le Dung | email=dung.le66@gmail.com | dob=2002-09-14 | home_town=NamDinh | math=8.5 | lit=7.8 | eng=3.3
+[id=58] 194657 | Ngo Duc | email=duc.ngo29@gmail.com | dob=2004-11-29 | home_town=NamDinh | math=5.2 | lit=6.8 | eng=4.8
+[id=59] 194658 | Le Linh | email=linh.le15@gmail.com | dob=2002-01-10 | home_town=CanTho | math=6.8 | lit=9.7 | eng=9.1
+[id=60] 194659 | Truong Minh | email=minh.truong55@gmail.com | dob=2006-08-23 | home_town=HaiPhong | math=8.4 | lit=8.3 | eng=8.7
+[id=61] 194660 | Truong Phuong | email=phuong.truong62@gmail.com | dob=2000-02-23 | home_town=QuangNinh | math=8.7 | lit=9.6 | eng=3.8
+[id=62] 194661 | Duong Huy | email=huy.duong32@gmail.com | dob=2005-12-26 | home_town=BinhDuong | math=7.1 | lit=5.9 | eng=3.4
+[id=63] 194662 | Truong Tuan | email=tuan.truong62@gmail.com | dob=2003-09-08 | home_town=BacGiang | math=8.3 | lit=8.7 | eng=5.5
+[id=64] 194663 | Duong Huy | email=huy.duong99@gmail.com | dob=2004-05-04 | home_town=HCM | math=6.9 | lit=5.2 | eng=8.0
+[id=65] 194664 | Ly Trang | email=trang.ly68@gmail.com | dob=2000-11-02 | home_town=NgheAn | math=6.5 | lit=9.0 | eng=4.4
+[id=66] 194665 | Do Minh | email=minh.do34@gmail.com | dob=2007-08-16 | home_town=ThanhHoa | math=6.6 | lit=9.3 | eng=3.9
+[id=67] 194666 | Huynh Dung | email=dung.huynh92@gmail.com | dob=2002-12-31 | home_town=NamDinh | math=7.0 | lit=9.9 | eng=5.1
+[id=68] 194667 | Tran Minh | email=minh.tran43@gmail.com | dob=2000-06-12 | home_town=DaNang | math=7.9 | lit=9.9 | eng=9.4
+[id=69] 194668 | Phan Quang | email=quang.phan54@gmail.com | dob=2004-06-22 | home_town=BacNinh | math=8.9 | lit=7.2 | eng=6.6
+[id=70] 194669 | Phan Anh | email=anh.phan83@gmail.com | dob=2002-04-09 | home_town=HaiPhong | math=6.3 | lit=8.5 | eng=9.3
+[id=71] 194670 | Duong Duc | email=duc.duong78@gmail.com | dob=2006-10-31 | home_town=Hue | math=8.6 | lit=8.7 | eng=10.0
+[id=72] 194671 | Phan Thao | email=thao.phan18@gmail.com | dob=2005-02-15 | home_town=Hue | math=9.6 | lit=8.1 | eng=9.9
+[id=73] 194672 | Ngo Anh | email=anh.ngo48@gmail.com | dob=2005-01-14 | home_town=NamDinh | math=6.5 | lit=7.0 | eng=5.5
+[id=74] 194673 | Dang Dung | email=dung.dang26@gmail.com | dob=2007-04-24 | home_town=HaiPhong | math=7.1 | lit=9.7 | eng=8.5
+[id=75] 194674 | Le Duc | email=duc.le88@gmail.com | dob=2007-02-09 | home_town=QuangNinh | math=6.5 | lit=7.7 | eng=4.9
+[id=76] 194675 | Pham Dung | email=dung.pham65@gmail.com | dob=2002-11-08 | home_town=BacGiang | math=7.9 | lit=8.3 | eng=3.7
+[id=77] 194676 | Do Nam | email=nam.do37@gmail.com | dob=2004-09-08 | home_town=NamDinh | math=7.4 | lit=9.5 | eng=7.0
+[id=78] 194677 | Do Huy | email=huy.do20@gmail.com | dob=2001-05-31 | home_town=CanTho | math=7.6 | lit=8.2 | eng=8.9
+[id=79] 194678 | Duong My | email=my.duong40@gmail.com | dob=2005-10-09 | home_town=Hue | math=6.6 | lit=9.0 | eng=9.5
+[id=80] 194679 | Pham Minh | email=minh.pham70@gmail.com | dob=2000-05-15 | home_town=QuangNinh | math=9.2 | lit=5.4 | eng=3.2
+[id=81] 194680 | Bui Ha | email=ha.bui34@gmail.com | dob=2000-03-02 | home_town=BacNinh | math=8.5 | lit=7.5 | eng=3.5
+[id=82] 194681 | Ngo Ha | email=ha.ngo10@gmail.com | dob=2005-05-27 | home_town=BinhDuong | math=8.8 | lit=8.9 | eng=3.8
+[id=83] 194682 | Pham Linh | email=linh.pham32@gmail.com | dob=2001-09-19 | home_town=BacGiang | math=9.8 | lit=7.6 | eng=4.0
+[id=84] 194683 | Truong Trang | email=trang.truong25@gmail.com | dob=2006-05-09 | home_town=ThaiBinh | math=5.7 | lit=7.3 | eng=4.4
+[id=85] 194684 | Bui Phuong | email=phuong.bui50@gmail.com | dob=2002-03-29 | home_town=BacGiang | math=9.5 | lit=8.1 | eng=4.1
+[id=86] 194685 | Phan Phuong | email=phuong.phan80@gmail.com | dob=2000-06-15 | home_town=ThaiBinh | math=9.5 | lit=8.7 | eng=4.7
+[id=87] 194686 | Duong Dung | email=dung.duong41@gmail.com | dob=2007-01-20 | home_town=LamDong | math=8.2 | lit=8.8 | eng=4.7
+[id=88] 194687 | Pham Ha | email=ha.pham45@gmail.com | dob=2001-10-04 | home_town=ThaiBinh | math=5.4 | lit=6.4 | eng=3.4
+[id=89] 194688 | Truong Thao | email=thao.truong79@gmail.com | dob=2007-02-24 | home_town=HCM | math=5.7 | lit=6.2 | eng=8.1
+[id=90] 194689 | Pham Khanh | email=khanh.pham18@gmail.com | dob=2000-08-20 | home_town=ThanhHoa | math=7.0 | lit=7.7 | eng=4.4
+[id=91] 194690 | Ly Trang | email=trang.ly63@gmail.com | dob=2003-01-05 | home_town=ThanhHoa | math=9.5 | lit=7.9 | eng=3.4
+[id=92] 194691 | Truong My | email=my.truong83@gmail.com | dob=2002-02-21 | home_town=ThanhHoa | math=7.4 | lit=9.7 | eng=4.7
+[id=93] 194692 | Ly Linh | email=linh.ly63@gmail.com | dob=2003-08-20 | home_town=NamDinh | math=8.7 | lit=7.7 | eng=3.0
+[id=94] 194693 | Vu Trang | email=trang.vu38@gmail.com | dob=2005-03-09 | home_town=CanTho | math=7.2 | lit=5.1 | eng=9.1
+[id=95] 194694 | Duong Ha | email=ha.duong61@gmail.com | dob=2006-11-15 | home_town=BacNinh | math=5.8 | lit=7.3 | eng=3.3
+[id=96] 194695 | Dang Quang | email=quang.dang13@gmail.com | dob=2002-11-18 | home_town=BinhDuong | math=7.0 | lit=7.8 | eng=5.8
+[id=97] 194696 | Phan Ha | email=ha.phan27@gmail.com | dob=2001-02-28 | home_town=LamDong | math=7.3 | lit=5.3 | eng=4.6
+[id=98] 194697 | Vu Trang | email=trang.vu51@gmail.com | dob=2002-12-05 | home_town=NgheAn | math=8.8 | lit=6.9 | eng=6.9
+[id=99] 194698 | Phan My | email=my.phan42@gmail.com | dob=2002-10-19 | home_town=LamDong | math=5.4 | lit=5.1 | eng=4.1
+[id=100] 194699 | Pham Thao | email=thao.pham93@gmail.com | dob=2001-07-23 | home_town=HCM | math=8.9 | lit=8.3 | eng=8.9
+[id=101] 194700 | Hoang Minh | email=minh.hoang21@gmail.com | dob=2000-03-22 | home_town=BacGiang | math=None | lit=5.5 | eng=6.6
+[id=102] 194701 | Phan Minh | email=minh.phan78@gmail.com | dob=2002-01-20 | home_town=NamDinh | math=None | lit=9.3 | eng=3.6
+[id=103] 194702 | Dang Thao | email=thao.dang52@gmail.com | dob=2000-07-08 | home_town=BacNinh | math=None | lit=5.0 | eng=4.7
+[id=104] 194703 | Truong Anh | email=anh.truong86@gmail.com | dob=2006-04-27 | home_town=ThanhHoa | math=None | lit=6.6 | eng=4.8
+[id=105] 194704 | Nguyen Duc | email=duc.nguyen21@gmail.com | dob=2003-03-30 | home_town=Hue | math=None | lit=9.0 | eng=8.0
+[id=106] 194705 | Phan Duc | email=duc.phan83@gmail.com | dob=2002-01-17 | home_town=ThaiBinh | math=None | lit=9.2 | eng=6.1
+[id=107] 194706 | Dang Thao | email=thao.dang71@gmail.com | dob=2000-09-10 | home_town=HaiPhong | math=None | lit=8.2 | eng=9.1
+[id=108] 194707 | Nguyen Thao | email=thao.nguyen60@gmail.com | dob=2006-11-29 | home_town=BinhDuong | math=None | lit=7.6 | eng=5.7
+[id=109] 194708 | Duong Ha | email=ha.duong95@gmail.com | dob=2007-06-11 | home_town=QuangNinh | math=None | lit=7.4 | eng=5.7
+[id=110] 194709 | Dang Thao | email=thao.dang14@gmail.com | dob=2007-03-21 | home_town=LamDong | math=None | lit=5.9 | eng=6.3
+[id=111] 194710 | Vu Duc | email=duc.vu94@gmail.com | dob=2000-02-07 | home_town=CanTho | math=5.9 | lit=None | eng=8.8
+[id=112] 194711 | Ngo Anh | email=anh.ngo68@gmail.com | dob=2003-01-01 | home_town=ThanhHoa | math=7.9 | lit=None | eng=3.8
+[id=113] 194712 | Ly Anh | email=anh.ly90@gmail.com | dob=2004-05-03 | home_town=NgheAn | math=5.1 | lit=None | eng=3.9
+[id=114] 194713 | Dang Phuong | email=phuong.dang17@gmail.com | dob=2004-07-24 | home_town=Hue | math=6.4 | lit=None | eng=9.5
+[id=115] 194714 | Pham Khanh | email=khanh.pham79@gmail.com | dob=2002-08-09 | home_town=ThaiBinh | math=9.9 | lit=None | eng=5.1
+[id=116] 194715 | Duong Linh | email=linh.duong69@gmail.com | dob=2002-09-04 | home_town=HaNoi | math=5.1 | lit=None | eng=8.0
+[id=117] 194716 | Huynh Tuan | email=tuan.huynh97@gmail.com | dob=2007-01-10 | home_town=CanTho | math=9.8 | lit=None | eng=8.0
+[id=118] 194717 | Tran Quang | email=quang.tran75@gmail.com | dob=2000-03-21 | home_town=NgheAn | math=8.5 | lit=None | eng=6.6
+[id=119] 194718 | Dang Tuan | email=tuan.dang58@gmail.com | dob=2001-02-19 | home_town=HCM | math=7.7 | lit=None | eng=8.1
+[id=120] 194719 | Hoang Thao | email=thao.hoang70@gmail.com | dob=2000-12-04 | home_town=HaNoi | math=8.8 | lit=None | eng=8.7
+[id=121] 194720 | Do Ha | email=ha.do30@gmail.com | dob=2002-08-24 | home_town=BinhDuong | math=9.8 | lit=5.3 | eng=None
+[id=122] 194721 | Huynh Huy | email=huy.huynh95@gmail.com | dob=2004-07-19 | home_town=HaiPhong | math=8.7 | lit=9.1 | eng=None
+[id=123] 194722 | Dang Tuan | email=tuan.dang59@gmail.com | dob=2002-08-14 | home_town=NamDinh | math=6.5 | lit=9.6 | eng=None
+[id=124] 194723 | Duong Dung | email=dung.duong59@gmail.com | dob=2005-09-30 | home_town=NgheAn | math=5.6 | lit=9.9 | eng=None
+[id=125] 194724 | Le Ha | email=ha.le85@gmail.com | dob=2001-11-11 | home_town=ThanhHoa | math=7.2 | lit=8.7 | eng=None
+[id=126] 194725 | Huynh Minh | email=minh.huynh67@gmail.com | dob=2001-03-03 | home_town=LamDong | math=8.7 | lit=8.6 | eng=None
+[id=127] 194726 | Hoang Nam | email=nam.hoang64@gmail.com | dob=1999-10-17 | home_town=BacGiang | math=8.9 | lit=5.8 | eng=None
+[id=128] 194727 | Dang Phuong | email=phuong.dang81@gmail.com | dob=2007-06-26 | home_town=DaNang | math=6.7 | lit=5.5 | eng=None
+[id=129] 194728 | Truong Trang | email=trang.truong82@gmail.com | dob=2003-06-28 | home_town=NgheAn | math=5.5 | lit=9.6 | eng=None
+[id=130] 194729 | Huynh Duc | email=duc.huynh43@gmail.com | dob=2006-05-11 | home_town=ThanhHoa | math=5.2 | lit=7.5 | eng=None
