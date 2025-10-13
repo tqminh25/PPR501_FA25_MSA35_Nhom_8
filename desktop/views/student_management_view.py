@@ -88,12 +88,14 @@ class StudentManagementView(BaseContentView):
         self.search_var = tk.StringVar()
         self.selected = None
         self.vars = {}
+        self._placeholder_text = "aaaaaaaaaa"
         
         super().__init__(parent_frame, "👥 Quản lý học sinh")
         self._setup_styles()
         self._load_sample_data()
         self.refresh()
     
+
     def _create_content(self):
         """Tạo nội dung quản lý học sinh"""
         # Search và tools
