@@ -45,3 +45,22 @@ def get_student_by_code(student_code: str, db: Session = Depends(get_db)):
     if not obj:
         raise HTTPException(404, "Not found")
     return obj
+
+@router.patch("/by-code/{student_code}/grades", response_model=schemas.StudentOut)
+def update_student_grades(student_code: str, grades: schemas.StudentGradesUpdate, db: Session = Depends(get_db)):
+    """Cập nhật điểm số của học sinh theo mã học sinh"""
+    student = db.query(crud.models.Student).filter(crud.models.Student.student_code == student_code).first()
+    if not student:
+        raise HTTPException(404, "Student not found")
+    
+    # Cập nhật điểm số
+    if grades.math_score is not None:
+        student.math_score = grades.math_score
+    if grades.literature_score is not None:
+        student.literature_score = grades.literature_score
+    if grades.english_score is not None:
+        student.english_score = grades.english_score
+    
+    db.commit()
+    db.refresh(student)
+    return student

@@ -226,7 +226,7 @@ class AppWindow(tk.Frame):
     def _create_content_area(self):
         """Tạo vùng content chính"""
         self.content_frame = ttk.Frame(self.main_container, style="Content.TFrame")
-        self.content_frame.grid(row=1, column=1, sticky="nsew", padx=CONTENT_PADDING, pady=CONTENT_PADDING)
+        self.content_frame.grid(row=1, column=1, sticky="nsew", padx=2, pady=2)
         self.content_frame.columnconfigure(0, weight=1)
         self.content_frame.rowconfigure(0, weight=1)
         

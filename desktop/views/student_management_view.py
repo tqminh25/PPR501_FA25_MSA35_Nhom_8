@@ -45,8 +45,6 @@ def status_badge(gpa):
 # API Functions via centralized client
 def api_get_students(page=1, page_size=12, search=""):
     """Lấy danh sách học sinh từ API qua api_client. Trả None nếu lỗi để dùng local fallback."""
-    print("--------------------------------")
-    print("Binh test api_get_students", page, page_size, search)
     try:
         return api_client.get_students(page=page, page_size=page_size, search=search)
     except Exception:
@@ -287,7 +285,6 @@ class StudentManagementView(BaseContentView):
         self._go_page(1)
     
     def refresh(self):
-        print("Binh test Refresh")
         """Refresh view"""
         try:
             # Try to get data from API first

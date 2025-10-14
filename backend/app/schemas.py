@@ -17,3 +17,9 @@ class StudentOut(StudentIn):
     id: int
     class Config:
         orm_mode = True
+
+class StudentGradesUpdate(BaseModel):
+    """Schema cho việc cập nhật điểm số"""
+    math_score: Optional[float] = Field(None, ge=0, le=10)
+    literature_score: Optional[float] = Field(None, ge=0, le=10)
+    english_score: Optional[float] = Field(None, ge=0, le=10)

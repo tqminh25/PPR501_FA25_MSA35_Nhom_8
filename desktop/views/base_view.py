@@ -64,13 +64,13 @@ class BaseContentView(BaseView):
         """Tạo base content view"""
         # Main frame
         self.main_frame = ttk.Frame(self.parent_frame, style="Content.TFrame")
-        self.main_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
+        self.main_frame.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
         self.main_frame.columnconfigure(0, weight=1)
         self.main_frame.rowconfigure(1, weight=1)
         
         # Title frame
         self.title_frame = ttk.Frame(self.main_frame, style="Content.TFrame")
-        self.title_frame.grid(row=0, column=0, sticky="ew", pady=(20, 10))
+        self.title_frame.grid(row=0, column=0, sticky="ew", pady=(5, 0))
         self.title_frame.columnconfigure(0, weight=1)
         
         # Title label
@@ -80,9 +80,11 @@ class BaseContentView(BaseView):
         
         # Content frame - để subclass override
         self.content_frame = ttk.Frame(self.main_frame, style="Content.TFrame")
-        self.content_frame.grid(row=1, column=0, sticky="nsew")
+        self.content_frame.grid(row=1, column=0, sticky="nsew", pady=(0, 0))
         self.content_frame.columnconfigure(0, weight=1)
-        self.content_frame.rowconfigure(0, weight=1)
+        # Cho phép tất cả các row expand
+        for i in range(10):  # Hỗ trợ tối đa 10 rows
+            self.content_frame.rowconfigure(i, weight=1)
         
         # Tạo nội dung cụ thể
         self._create_content()

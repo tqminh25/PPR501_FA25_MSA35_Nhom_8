@@ -1,0 +1,35 @@
+{
+    "include": [
+        "desktop/**/*.py",
+        "backend/**/*.py",
+        "scripts/**/*.py"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "**/.git",
+        "**/node_modules"
+    ],
+    "pythonVersion": "3.8",
+    "pythonPlatform": "Darwin",
+    "executionEnvironments": [
+        {
+            "root": "desktop",
+            "pythonVersion": "3.8",
+            "pythonPlatform": "Darwin"
+        },
+        {
+            "root": "backend",
+            "pythonVersion": "3.8",
+            "pythonPlatform": "Darwin"
+        }
+    ],
+    "typeCheckingMode": "basic",
+    "useLibraryCodeForTypes": true,
+    "autoSearchPaths": true,
+    "extraPaths": [
+        "desktop",
+        "backend",
+        "scripts"
+    ]
+}
+

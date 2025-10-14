@@ -18,7 +18,6 @@ def get_students(page: int = 1, page_size: int = 12, search: str = "") -> Dict[s
     response.raise_for_status()
     data = response.json()
     # Support both paginated dict or raw list responses from backend
-    print("Binh test get_students", data)
     if isinstance(data, list):
         total = len(data)
         start = (page - 1) * page_size
@@ -52,5 +51,16 @@ def delete_student(student_id: int) -> bool:
     if response.status_code not in (200, 204):
         response.raise_for_status()
     return True
+
+
+def update_student_grades(student_code: str, grades: Dict[str, Any]) -> Dict[str, Any]:
+    """Cập nhật điểm số của học sinh theo mã học sinh"""
+    response = requests.patch(
+        f"{API_BASE_URL}/students/by-code/{student_code}/grades", 
+        json=grades, 
+        timeout=API_TIMEOUT
+    )
+    response.raise_for_status()
+    return response.json()
 
 
