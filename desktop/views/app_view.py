@@ -19,11 +19,11 @@ if TYPE_CHECKING:
     from views.login_view import LoginView
 
 
-class AppWindow(tk.Tk):
+class AppWindow(tk.Frame):
     """Màn hình App chính sau khi login"""
     
     def __init__(self, parent: 'LoginView', username: str, remember: str):
-        super().__init__()
+        super().__init__(parent)
         self.parent = parent
         self.username = username
         self.remember = remember
@@ -36,14 +36,14 @@ class AppWindow(tk.Tk):
         self.views = {}
         self.current_view = None
         
-        self.title(f"EduManager Pro - Xin chào {username}")
         self._setup_window()
         self._initialize_style()
         self._create_layout()
     
     def _setup_window(self):
         """Thiết lập cửa sổ App"""
-        WindowUtils.setup_fullscreen(self, min_width=1000, min_height=600)
+        # Pack để fill toàn bộ parent window
+        self.pack(fill="both", expand=True)
     
     def _initialize_style(self):
         """Khởi tạo style cho App"""
@@ -69,7 +69,7 @@ class AppWindow(tk.Tk):
         self._create_content_area()
         
         # Bind resize event
-        WindowUtils.bind_resize_event(self, self._on_window_resize)
+        WindowUtils.bind_resize_event(self.master, self._on_window_resize)
     
     def _setup_responsive_layout(self):
         """Thiết lập responsive layout"""
@@ -85,7 +85,7 @@ class AppWindow(tk.Tk):
     
     def _on_window_resize(self):
         """Xử lý khi window resize"""
-        self.after(100, self._update_layout)
+        self.master.after(100, self._update_layout)
     
     def _update_layout(self):
         """Cập nhật layout khi resize"""
@@ -322,14 +322,8 @@ class AppWindow(tk.Tk):
     def _logout(self):
         """Đăng xuất"""
         if messagebox.askyesno("Xác nhận", "Bạn có chắc chắn muốn đăng xuất?"):
+            # Xóa AppWindow hiện tại
             self.destroy()
-            # Quay lại màn hình login
-            from .login_view import LoginView
-            from models.login_model import LoginModel
-            from presenters.login_presenter import LoginPresenter
             
-            login_view = LoginView()
-            model = LoginModel()
-            presenter = LoginPresenter(login_view, model)
-            login_view.presenter = presenter
-            login_view.mainloop()
+            # Quay lại màn hình login trong cùng cửa sổ
+            self.parent._show_login_screen()

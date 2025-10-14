@@ -217,7 +217,7 @@ class LoginView(tk.Tk, ILoginView):
             except Exception:
                 pass
 
-        # Tạo App screen
+        # Tạo App screen - sử dụng self thay vì tạo cửa sổ mới
         self._create_app_screen(username, remember)
     
     def show_error(self, message: str):
@@ -234,6 +234,28 @@ class LoginView(tk.Tk, ILoginView):
         # Import here to avoid circular import
         from .app_view import AppWindow
         
-        # Tạo App window mới
-        app_window = AppWindow(self, username, remember)
-        app_window.mainloop()
+        # Chuyển đổi cửa sổ hiện tại thành App window
+        # Xóa tất cả widgets hiện tại
+        for widget in self.winfo_children():
+            widget.destroy()
+        
+        # Tạo AppWindow trong cửa sổ hiện tại
+        self.app_window = AppWindow(self, username, remember)
+        
+        # Cập nhật title
+        self.title(f"EduManager Pro - Xin chào {username}")
+        
+        # Không gọi mainloop() vì đã có mainloop() chạy rồi
+    
+    def _show_login_screen(self):
+        """Quay lại màn hình login"""
+        # Xóa AppWindow hiện tại nếu có
+        if hasattr(self, 'app_window'):
+            self.app_window.destroy()
+            delattr(self, 'app_window')
+        
+        # Reset title
+        self.title("Đăng nhập - MVP Architecture")
+        
+        # Tạo lại form login
+        self._build_ui()
