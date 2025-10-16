@@ -64,3 +64,10 @@ def update_student_grades(student_code: str, grades: Dict[str, Any]) -> Dict[str
     return response.json()
 
 
+def get_statistics() -> Dict[str, Any]:
+    """Lấy thống kê tổng quan về học sinh"""
+    response = requests.get(f"{API_BASE_URL}/students/statistics", timeout=API_TIMEOUT)
+    response.raise_for_status()
+    return response.json()
+
+

@@ -15,6 +15,66 @@ def get_db():
 def list_students(skip: int = 0, limit: int = 100, search: str | None = Query(None), db: Session = Depends(get_db)):
     return crud.list_students(db, skip, limit, search)
 
+@router.get("/statistics", response_model=dict)
+def get_students_statistics(db: Session = Depends(get_db)):
+    """Lấy thống kê tổng quan về học sinh"""
+    # Lấy tất cả học sinh
+    all_students = db.query(crud.models.Student).all()
+    
+    if not all_students:
+        return {
+            "total_students": 0,
+            "avg_math_score": 0.0,
+            "avg_literature_score": 0.0,
+            "avg_english_score": 0.0,
+            "avg_overall_score": 0.0
+        }
+    
+    # Tính tổng số học sinh
+    total_students = len(all_students)
+    
+    # Tính điểm trung bình các môn
+    math_scores = []
+    literature_scores = []
+    english_scores = []
+    overall_scores = []
+    
+    for student in all_students:
+        # Lọc điểm hợp lệ (0-10)
+        if student.math_score is not None and 0 <= student.math_score <= 10:
+            math_scores.append(student.math_score)
+        if student.literature_score is not None and 0 <= student.literature_score <= 10:
+            literature_scores.append(student.literature_score)
+        if student.english_score is not None and 0 <= student.english_score <= 10:
+            english_scores.append(student.english_score)
+        
+        # Tính điểm trung bình của từng học sinh (chỉ với điểm hợp lệ)
+        student_scores = []
+        if student.math_score is not None and 0 <= student.math_score <= 10:
+            student_scores.append(student.math_score)
+        if student.literature_score is not None and 0 <= student.literature_score <= 10:
+            student_scores.append(student.literature_score)
+        if student.english_score is not None and 0 <= student.english_score <= 10:
+            student_scores.append(student.english_score)
+        
+        if student_scores:
+            avg_student = sum(student_scores) / len(student_scores)
+            overall_scores.append(avg_student)
+    
+    # Tính điểm trung bình
+    avg_math = sum(math_scores) / len(math_scores) if math_scores else 0.0
+    avg_literature = sum(literature_scores) / len(literature_scores) if literature_scores else 0.0
+    avg_english = sum(english_scores) / len(english_scores) if english_scores else 0.0
+    avg_overall = sum(overall_scores) / len(overall_scores) if overall_scores else 0.0
+    
+    return {
+        "total_students": total_students,
+        "avg_math_score": round(avg_math, 2),
+        "avg_literature_score": round(avg_literature, 2),
+        "avg_english_score": round(avg_english, 2),
+        "avg_overall_score": round(avg_overall, 2)
+    }
+
 @router.get("/{id}", response_model=schemas.StudentOut)
 def get_student(id: int, db: Session = Depends(get_db)):
     obj = crud.get_student(db, id)

@@ -12,7 +12,7 @@ def list_students(db: Session, skip=0, limit=100, search: str | None = None):
             models.Student.last_name.ilike(like),
             models.Student.email.ilike(like),
         ))
-    return q.offset(skip).limit(limit).all()
+    return q.offset(skip).all()
 
 def get_student(db: Session, id: int):
     return db.query(models.Student).get(id)

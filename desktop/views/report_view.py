@@ -4,8 +4,11 @@ Report View - Báo cáo thống kê
 
 import tkinter as tk
 from tkinter import ttk, messagebox
-from typing import Dict, List
 from .base_view import BaseContentView
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from models.api_client import get_students, get_statistics
 
 
 class ReportView(BaseContentView):
@@ -14,7 +17,10 @@ class ReportView(BaseContentView):
     def __init__(self, parent_frame: ttk.Frame):
         # Khởi tạo dữ liệu trước khi gọi super().__init__()
         self.report_data = {}
-        self._load_sample_data()
+        self.students_data = []
+        self.filter_var = None
+        self.details_text = None
+        self._load_data_from_api()
         
         super().__init__(parent_frame, "📋 Báo cáo thống kê")
     
@@ -31,33 +37,6 @@ class ReportView(BaseContentView):
         toolbar_frame = ttk.Frame(self.content_frame, style="Content.TFrame")
         toolbar_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=(0, 10))
         toolbar_frame.columnconfigure(1, weight=1)
-        
-        # Nút tạo báo cáo
-        generate_btn = ttk.Button(toolbar_frame, text="📊 Tạo báo cáo", 
-                                command=self._generate_report)
-        generate_btn.grid(row=0, column=0, padx=(0, 10))
-        
-        # Nút xuất Excel
-        export_btn = ttk.Button(toolbar_frame, text="📤 Xuất Excel", 
-                              command=self._export_excel)
-        export_btn.grid(row=0, column=1, padx=(0, 10))
-        
-        # Nút in báo cáo
-        print_btn = ttk.Button(toolbar_frame, text="🖨️ In báo cáo", 
-                             command=self._print_report)
-        print_btn.grid(row=0, column=2, padx=(0, 10))
-        
-        # Filter options
-        filter_frame = ttk.Frame(toolbar_frame, style="Content.TFrame")
-        filter_frame.grid(row=0, column=3, sticky="e")
-        
-        ttk.Label(filter_frame, text="Lọc theo:", style="Content.TLabel").grid(row=0, column=0, padx=(0, 5))
-        self.filter_var = tk.StringVar(value="Tất cả")
-        filter_combo = ttk.Combobox(filter_frame, textvariable=self.filter_var, 
-                                  values=["Tất cả", "Theo lớp", "Theo điểm"], 
-                                  state="readonly", width=12)
-        filter_combo.grid(row=0, column=1)
-        filter_combo.bind('<<ComboboxSelected>>', self._on_filter_change)
     
     def _create_report_content(self):
         """Tạo nội dung báo cáo"""
@@ -70,9 +49,6 @@ class ReportView(BaseContentView):
         
         # Left panel - Statistics
         self._create_statistics_panel(content_frame)
-        
-        # Right panel - Charts/Details
-        self._create_charts_panel(content_frame)
     
     def _create_statistics_panel(self, parent):
         """Tạo panel thống kê"""
@@ -83,9 +59,6 @@ class ReportView(BaseContentView):
         
         # Statistics cards
         self._create_stat_cards(stats_frame)
-        
-        # Detailed stats
-        self._create_detailed_stats(stats_frame)
     
     def _create_stat_cards(self, parent):
         """Tạo các thẻ thống kê"""
@@ -93,149 +66,147 @@ class ReportView(BaseContentView):
         cards_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=10)
         cards_frame.columnconfigure(0, weight=1)
         cards_frame.columnconfigure(1, weight=1)
+        cards_frame.columnconfigure(2, weight=1)
         
         # Card 1 - Tổng số học sinh
-        card1 = self._create_stat_card(cards_frame, "👥", "Tổng học sinh", 
-                                     str(self.report_data.get('total_students', 0)), 
-                                     "Học sinh", 0, 0)
+        self._create_stat_card(cards_frame, "👥", "Tổng học sinh", 
+                             str(self.report_data.get('total_students', 0)), 
+                             "Học sinh", 0, 0)
         
-        # Card 2 - Điểm trung bình
-        card2 = self._create_stat_card(cards_frame, "📊", "Điểm TB", 
-                                     f"{self.report_data.get('avg_score', 0):.1f}", 
-                                     "Điểm", 0, 1)
+        # Card 2 - Điểm trung bình tổng
+        self._create_stat_card(cards_frame, "📊", "Điểm TB tổng", 
+                             f"{self.report_data.get('avg_score', 0):.1f}", 
+                             "Điểm", 0, 1)
         
-        # Card 3 - Số lớp
-        card3 = self._create_stat_card(cards_frame, "🏫", "Số lớp", 
-                                     str(self.report_data.get('total_classes', 0)), 
-                                     "Lớp", 1, 0)
+        # Card 3 - Điểm Toán
+        self._create_stat_card(cards_frame, "🔢", "Điểm Toán", 
+                             f"{self.report_data.get('math_avg', 0):.1f}", 
+                             "Điểm", 0, 2)
         
-        # Card 4 - Tỷ lệ đỗ
-        card4 = self._create_stat_card(cards_frame, "✅", "Tỷ lệ đỗ", 
-                                     f"{self.report_data.get('pass_rate', 0):.1f}%", 
-                                     "Phần trăm", 1, 1)
+        # Card 4 - Điểm Văn
+        self._create_stat_card(cards_frame, "📝", "Điểm Văn", 
+                             f"{self.report_data.get('literature_avg', 0):.1f}", 
+                             "Điểm", 1, 0)
+        
+        # Card 5 - Điểm Tiếng Anh
+        self._create_stat_card(cards_frame, "🌍", "Điểm Tiếng Anh", 
+                             f"{self.report_data.get('english_avg', 0):.1f}", 
+                             "Điểm", 1, 1)
     
     def _create_stat_card(self, parent, icon, title, value, unit, row, col):
-        """Tạo một thẻ thống kê"""
-        card = ttk.Frame(parent, style="Content.TFrame", relief="solid", borderwidth=1)
+        """Tạo một thẻ thống kê với background trắng"""
+        card = tk.Frame(parent, bg="white", relief="solid", borderwidth=1)
         card.grid(row=row, column=col, sticky="ew", padx=5, pady=5)
         card.columnconfigure(0, weight=1)
         
         # Icon và title
-        header_frame = ttk.Frame(card, style="Content.TFrame")
+        header_frame = tk.Frame(card, bg="white")
         header_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=(10, 5))
         
-        icon_label = ttk.Label(header_frame, text=icon, font=("Helvetica", 16))
+        icon_label = tk.Label(header_frame, text=icon, font=("Helvetica", 16), 
+                            bg="white", fg="#4f46e5")
         icon_label.grid(row=0, column=0, padx=(0, 5))
         
-        title_label = ttk.Label(header_frame, text=title, style="Content.TLabel")
+        title_label = tk.Label(header_frame, text=title, font=("Helvetica", 12, "bold"), 
+                             bg="white", fg="#374151")
         title_label.grid(row=0, column=1, sticky="w")
         
         # Value
-        value_label = ttk.Label(card, text=value, font=("Helvetica", 24, "bold"), 
-                              foreground="#2c3e50", style="Content.TLabel")
+        value_label = tk.Label(card, text=value, font=("Helvetica", 24, "bold"), 
+                              bg="white", fg="#1f2937")
         value_label.grid(row=1, column=0, pady=5)
         
         # Unit
-        unit_label = ttk.Label(card, text=unit, style="Content.TLabel")
+        unit_label = tk.Label(card, text=unit, font=("Helvetica", 11), 
+                             bg="white", fg="#6b7280")
         unit_label.grid(row=2, column=0, pady=(0, 10))
         
         return card
     
-    def _create_detailed_stats(self, parent):
-        """Tạo thống kê chi tiết"""
-        details_frame = ttk.LabelFrame(parent, text="📋 Chi tiết", 
-                                     style="Content.TFrame")
-        details_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=(0, 10))
-        details_frame.columnconfigure(0, weight=1)
-        
-        # Tạo text widget để hiển thị thống kê chi tiết
-        self.details_text = tk.Text(details_frame, height=8, wrap=tk.WORD, 
-                                  font=("Helvetica", 10))
-        self.details_text.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
-        
-        # Scrollbar
-        scrollbar = ttk.Scrollbar(details_frame, orient="vertical", 
-                                command=self.details_text.yview)
-        self.details_text.configure(yscrollcommand=scrollbar.set)
-        scrollbar.grid(row=0, column=1, sticky="ns")
-        
-        # Load detailed stats
-        self._load_detailed_stats()
-    
-    def _create_charts_panel(self, parent):
-        """Tạo panel biểu đồ"""
-        charts_frame = ttk.LabelFrame(parent, text="📊 Biểu đồ", 
-                                    style="Content.TFrame")
-        charts_frame.grid(row=0, column=1, sticky="nsew", padx=(5, 0), pady=5)
-        charts_frame.columnconfigure(0, weight=1)
-        charts_frame.rowconfigure(0, weight=1)
-        
-        # Placeholder cho biểu đồ
-        chart_placeholder = ttk.Label(charts_frame, 
-                                    text="📊\n\nBiểu đồ thống kê\n\n(Đang phát triển)", 
-                                    font=("Helvetica", 14), style="Content.TLabel")
-        chart_placeholder.grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
-    
-    def _load_sample_data(self):
-        """Load dữ liệu mẫu"""
-        self.report_data = {
-            'total_students': 150,
-            'avg_score': 8.2,
-            'total_classes': 6,
-            'pass_rate': 85.5,
-            'class_stats': {
-                '10A1': {'students': 25, 'avg_score': 8.5},
-                '10A2': {'students': 24, 'avg_score': 8.1},
-                '11A1': {'students': 26, 'avg_score': 8.3},
-                '11A2': {'students': 25, 'avg_score': 8.0},
-                '12A1': {'students': 25, 'avg_score': 8.4},
-                '12A2': {'students': 25, 'avg_score': 8.2},
+    def _load_data_from_api(self):
+        """Load dữ liệu từ API"""
+        try:
+            # Lấy thống kê từ API statistics
+            stats_response = get_statistics()
+            self.report_data = {
+                'total_students': stats_response.get('total_students', 0),
+                'avg_score': stats_response.get('avg_overall_score', 0.0),
+                'math_avg': stats_response.get('avg_math_score', 0.0),
+                'literature_avg': stats_response.get('avg_literature_score', 0.0),
+                'english_avg': stats_response.get('avg_english_score', 0.0),
             }
-        }
+            
+            # Lấy dữ liệu học sinh để tính thống kê chi tiết
+            students_response = get_students(page=1, page_size=10000)
+            self.students_data = students_response.get('items', [])
+            
+            # Tính thống kê chi tiết từ dữ liệu học sinh
+            self._calculate_detailed_statistics()
+            
+        except (ConnectionError, TimeoutError, ValueError) as e:
+            print(f"Lỗi khi tải dữ liệu từ API: {e}")
     
-    def _load_detailed_stats(self):
-        """Load thống kê chi tiết"""
-        details = f"""
-THỐNG KÊ CHI TIẾT HỌC SINH
-
-📊 Tổng quan:
-• Tổng số học sinh: {self.report_data['total_students']} học sinh
-• Điểm trung bình: {self.report_data['avg_score']}/10
-• Số lớp học: {self.report_data['total_classes']} lớp
-• Tỷ lệ đỗ: {self.report_data['pass_rate']}%
-
-📈 Thống kê theo lớp:
-"""
+    def _calculate_detailed_statistics(self):
+        """Tính toán thống kê chi tiết từ dữ liệu học sinh"""
+        if not self.students_data:
+            return
         
-        for class_name, stats in self.report_data['class_stats'].items():
-            details += f"• {class_name}: {stats['students']} học sinh, TB: {stats['avg_score']}/10\n"
+        # Thống kê theo quê quán (home_town)
+        home_town_stats = {}
+        for student in self.students_data:
+            home_town = student.get('home_town', 'Không xác định')
+            if home_town not in home_town_stats:
+                home_town_stats[home_town] = {'students': 0, 'scores': []}
+            
+            home_town_stats[home_town]['students'] += 1
+            scores = [
+                student.get('math_score'),
+                student.get('literature_score'),
+                student.get('english_score')
+            ]
+            # Lọc điểm hợp lệ (0-10)
+            valid_scores = [score for score in scores if score is not None and 0 <= score <= 10]
+            if len(valid_scores) == 3:  # Chỉ tính học sinh có đủ 3 điểm hợp lệ
+                avg_student = sum(valid_scores) / len(valid_scores)
+                home_town_stats[home_town]['scores'].append(avg_student)
         
-        details += f"""
-🎯 Phân loại học sinh:
-• Giỏi (8.0-10.0): {int(self.report_data['total_students'] * 0.3)} học sinh
-• Khá (6.5-7.9): {int(self.report_data['total_students'] * 0.4)} học sinh  
-• Trung bình (5.0-6.4): {int(self.report_data['total_students'] * 0.25)} học sinh
-• Yếu (<5.0): {int(self.report_data['total_students'] * 0.05)} học sinh
-"""
+        # Tính điểm trung bình theo quê quán
+        class_stats = {}
+        for home_town, stats in home_town_stats.items():
+            if stats['scores']:
+                avg_score_hometown = sum(stats['scores']) / len(stats['scores'])
+                class_stats[home_town] = {
+                    'students': stats['students'],
+                    'avg_score': round(avg_score_hometown, 1)
+                }
         
-        self.details_text.delete(1.0, tk.END)
-        self.details_text.insert(1.0, details)
-        self.details_text.config(state=tk.DISABLED)
+        # Cập nhật thống kê chi tiết
+        self.report_data.update({
+            'class_stats': class_stats,
+        })
     
     def _on_filter_change(self, event=None):
         """Xử lý khi thay đổi filter"""
-        filter_value = self.filter_var.get()
-        messagebox.showinfo("Thông báo", f"Đã chọn filter: {filter_value}")
+        if self.filter_var:
+            filter_value = self.filter_var.get()
+            messagebox.showinfo("Thông báo", f"Đã chọn filter: {filter_value}")
+        # Suppress unused argument warning
+        _ = event
     
     def _generate_report(self):
         """Tạo báo cáo mới"""
-        messagebox.showinfo("Thông báo", "Đang tạo báo cáo...")
-        self.refresh()
-        messagebox.showinfo("Thành công", "Báo cáo đã được tạo thành công!")
+        try:
+            messagebox.showinfo("Thông báo", "Đang tạo báo cáo...")
+            # Tải lại dữ liệu từ API
+            self._load_data_from_api()
+            self.refresh()
+            messagebox.showinfo("Thành công", "Báo cáo đã được tạo thành công!")
+        except (ConnectionError, TimeoutError, ValueError) as e:
+            messagebox.showerror("Lỗi", f"Không thể tạo báo cáo: {str(e)}")
     
     def _export_excel(self):
         """Xuất báo cáo ra Excel"""
-        messagebox.showinfo("Thông báo", "Chức năng xuất Excel - Đang phát triển")
+        
     
     def _print_report(self):
         """In báo cáo"""
@@ -243,4 +214,46 @@ THỐNG KÊ CHI TIẾT HỌC SINH
     
     def refresh(self):
         """Refresh view"""
-        self._load_detailed_stats()
+        # Cập nhật các thẻ thống kê
+        self._update_stat_cards()
+    
+    def _update_stat_cards(self):
+        """Cập nhật các thẻ thống kê với dữ liệu mới"""
+        # Tìm và cập nhật các thẻ thống kê
+        for widget in self.content_frame.winfo_children():
+            if isinstance(widget, ttk.Frame):
+                self._update_widget_stats(widget)
+    
+    def _update_widget_stats(self, widget):
+        """Cập nhật thống kê trong widget"""
+        for child in widget.winfo_children():
+            if isinstance(child, (tk.Frame, ttk.Frame)):
+                # Tìm các label chứa giá trị thống kê
+                for grandchild in child.winfo_children():
+                    if isinstance(grandchild, (tk.Label, ttk.Label)):
+                        # Kiểm tra nếu đây là label chứa giá trị (font size lớn)
+                        font_info = grandchild.cget("font")
+                        if isinstance(font_info, tuple) and len(font_info) >= 2:
+                            font_size = font_info[1]
+                            if font_size >= 20:  # Label giá trị có font size lớn
+                                # Tìm title tương ứng trong cùng parent frame
+                                parent_frame = grandchild.master
+                                for sibling in parent_frame.winfo_children():
+                                    if isinstance(sibling, (tk.Label, ttk.Label)):
+                                        sibling_text = sibling.cget("text")
+                                        if "Tổng học sinh" in sibling_text:
+                                            grandchild.config(text=str(self.report_data.get('total_students', 0)))
+                                            break
+                                        elif "Điểm TB tổng" in sibling_text:
+                                            grandchild.config(text=f"{self.report_data.get('avg_score', 0):.1f}")
+                                            break
+                                        elif "Điểm Toán" in sibling_text:
+                                            grandchild.config(text=f"{self.report_data.get('math_avg', 0):.1f}")
+                                            break
+                                        elif "Điểm Văn" in sibling_text:
+                                            grandchild.config(text=f"{self.report_data.get('literature_avg', 0):.1f}")
+                                            break
+                                        elif "Điểm Tiếng Anh" in sibling_text:
+                                            grandchild.config(text=f"{self.report_data.get('english_avg', 0):.1f}")
+                                            break
+                self._update_widget_stats(child)
