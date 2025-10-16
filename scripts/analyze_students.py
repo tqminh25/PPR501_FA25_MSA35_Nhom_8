@@ -262,6 +262,20 @@ def main():
     # Plot 3-line chart and ranked bars
     group, _ = plot_avg_scores(df_clean, DATA_DIR)
     plot_sorted_bars(group, DATA_DIR)
+    
+    # Thêm phân tích theo nhóm tuổi
+    print("\n" + "="*50)
+    print("BẮT ĐẦU PHÂN TÍCH THEO NHÓM TUỔI")
+    print("="*50)
+    
+    # Import và chạy phân tích tuổi
+    try:
+        from analyze_by_age import main as analyze_age_main
+        analyze_age_main()
+    except ImportError:
+        print("Không thể import analyze_by_age.py")
+    except Exception as e:
+        print(f"Lỗi khi chạy phân tích tuổi: {e}")
 
 
 if __name__ == "__main__":
