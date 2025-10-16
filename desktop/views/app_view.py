@@ -41,54 +41,35 @@ class AppWindow(tk.Frame):
         self._create_layout()
     
     def _setup_window(self):
-        """Thiết lập cửa sổ App"""
-        # Pack để fill toàn bộ parent window
         self.pack(fill="both", expand=True)
     
     def _initialize_style(self):
-        """Khởi tạo style cho App"""
         self.style = AppStyles.initialize_app_styles()
     
     def _create_layout(self):
-        """Tạo bố cục chính"""
-        # Main container
         self.main_container = ttk.Frame(self)
         self.main_container.grid(row=0, column=0, sticky="nsew")
         self.main_container.configure(style="TFrame")
         
-        # Cấu hình responsive layout
         self._setup_responsive_layout()
-        
-        # Header
         self._create_header()
-        
-        # Sidebar
         self._create_sidebar()
-        
-        # Content area
         self._create_content_area()
-        
-        # Bind resize event
         WindowUtils.bind_resize_event(self.master, self._on_window_resize)
     
     def _setup_responsive_layout(self):
-        """Thiết lập responsive layout"""
-        # Cấu hình grid weights cho responsive
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         
-        # Main container layout
-        self.main_container.columnconfigure(0, weight=0)  # Sidebar
-        self.main_container.columnconfigure(1, weight=1)  # Content
-        self.main_container.rowconfigure(0, weight=0)     # Header
-        self.main_container.rowconfigure(1, weight=1)     # Main content
+        self.main_container.columnconfigure(0, weight=0)
+        self.main_container.columnconfigure(1, weight=1)
+        self.main_container.rowconfigure(0, weight=0)
+        self.main_container.rowconfigure(1, weight=1)
     
     def _on_window_resize(self):
-        """Xử lý khi window resize"""
         self.master.after(100, self._update_layout)
     
     def _update_layout(self):
-        """Cập nhật layout khi resize"""
         try:
             window_width = self.winfo_width()
             
@@ -97,34 +78,26 @@ class AppWindow(tk.Frame):
             else:
                 sidebar_width = int(window_width * SIDEBAR_EXPANDED_WIDTH_PERCENT)
             
-            # Cập nhật minsize cho sidebar
             self.main_container.columnconfigure(0, weight=0, minsize=sidebar_width)
-            
-            # Cập nhật chiều cao header
             self.header_frame.configure(height=HEADER_HEIGHT)
             
         except tk.TclError:
-            pass  # Window đã bị destroy
+            pass
     
     def _create_header(self):
-        """Tạo header bar"""
         self.header_frame = ttk.Frame(self.main_container, style="Header.TFrame")
         self.header_frame.grid(row=0, column=0, columnspan=2, sticky="ew", padx=0, pady=0)
         self.header_frame.columnconfigure(2, weight=1)
         
-        # Thiết lập chiều cao header
         self.header_frame.configure(height=HEADER_HEIGHT)
         
-        # Toggle button
         self.toggle_btn = ttk.Button(self.header_frame, text="☰", style="Toggle.TButton", 
                                    command=self._toggle_sidebar, width=3)
         self.toggle_btn.grid(row=0, column=0, padx=15, pady=15, sticky="w")
         
-        # Logo và tên app
         logo_label = ttk.Label(self.header_frame, text="🎓 EduManager Pro", style="Header.TLabel")
         logo_label.grid(row=0, column=1, padx=20, pady=15, sticky="w")
         
-        # Thông tin user và logout
         user_frame = ttk.Frame(self.header_frame, style="Header.TFrame")
         user_frame.grid(row=0, column=2, padx=20, pady=15, sticky="e")
         
@@ -132,17 +105,14 @@ class AppWindow(tk.Frame):
         user_label.grid(row=0, column=0, padx=(0, 10))
     
     def _create_sidebar(self):
-        """Tạo menu trái với khả năng toggle"""
         self.sidebar_frame = ttk.Frame(self.main_container, style="Sidebar.TFrame")
         self.sidebar_frame.grid(row=1, column=0, sticky="nsew", padx=0, pady=0)
         self.sidebar_frame.columnconfigure(0, weight=1)
         
-        # Tạo menu buttons container
         self.menu_container = ttk.Frame(self.sidebar_frame, style="Sidebar.TFrame")
         self.menu_container.grid(row=0, column=0, sticky="nsew", padx=0, pady=0)
         self.menu_container.columnconfigure(0, weight=1)
         
-        # Tạo menu buttons
         self.menu_buttons = []
         for i, (icon, text, page) in enumerate(MENU_ITEMS):
             btn = ttk.Button(self.menu_container, text=f"{icon} {text}", style="Sidebar.TButton", 
@@ -150,10 +120,8 @@ class AppWindow(tk.Frame):
             btn.grid(row=i, column=0, sticky="ew", padx=10, pady=5)
             self.menu_buttons.append((btn, icon, text, page))
             
-            # Thêm tooltip cho button
             self._create_tooltip(btn, text)
         
-        # Thông tin user ở cuối sidebar
         self.user_info_frame = ttk.Frame(self.sidebar_frame, style="Sidebar.TFrame")
         self.user_info_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=20)
         self.user_info_frame.columnconfigure(0, weight=1)
@@ -165,11 +133,9 @@ class AppWindow(tk.Frame):
             self.remember_label = ttk.Label(self.user_info_frame, text="💾 Đã ghi nhớ", style="Sidebar.TLabel")
             self.remember_label.grid(row=1, column=0, pady=2)
         
-        # Cập nhật layout ban đầu
         self._update_sidebar_layout()
     
     def _toggle_sidebar(self):
-        """Toggle sidebar giữa expanded và collapsed"""
         self.sidebar_collapsed = not self.sidebar_collapsed
         self._update_sidebar_layout()
         self._update_layout()
