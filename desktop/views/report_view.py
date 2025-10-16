@@ -336,6 +336,7 @@ class ReportView(BaseContentView):
         self.chart_listbox = tk.Listbox(list_frame, height=15)
         self.chart_listbox.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
         self.chart_listbox.bind('<<ListboxSelect>>', self._on_chart_select)
+        self.chart_listbox.bind('<Double-Button-1>', self._on_chart_double_click)
         
         # Add charts to listbox
         for i, chart in enumerate(self.chart_images):
@@ -369,9 +370,10 @@ class ReportView(BaseContentView):
         canvas.configure(yscrollcommand=scrollbar_v.set, xscrollcommand=scrollbar_h.set)
         canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
         
-        # Display image
-        image_label = tk.Label(scrollable_frame, image=chart['photo'], bg="white")
+        # Display image with double-click event
+        image_label = tk.Label(scrollable_frame, image=chart['photo'], bg="white", cursor="hand2")
         image_label.pack(pady=10)
+        image_label.bind("<Double-Button-1>", lambda e: self._show_chart_popup(index))
         
         # Update scroll region
         scrollable_frame.update_idletasks()
@@ -406,8 +408,224 @@ class ReportView(BaseContentView):
             self._show_chart(self.current_chart_index + 1)
     
     def _on_chart_select(self, event):
-        """Xử lý khi chọn biểu đồ từ listbox"""
         selection = self.chart_listbox.curselection()
         if selection:
             index = selection[0]
             self._show_chart(index)
+    
+    def _on_chart_double_click(self, event):
+        """Xử lý khi double-click vào biểu đồ trong listbox"""
+        selection = self.chart_listbox.curselection()
+        if selection:
+            index = selection[0]
+            self._show_chart_popup(index)
+    
+    def _show_chart_popup(self, index):
+        """Hiển thị popup với ảnh biểu đồ lớn và thông tin chi tiết"""
+        if not self.chart_images or index < 0 or index >= len(self.chart_images):
+            return
+        
+        chart = self.chart_images[index]
+        
+        # Tạo popup window
+        popup = tk.Toplevel(self.content_frame.winfo_toplevel())
+        popup.title(f"Biểu đồ: {chart['name']}")
+        popup.geometry("1200x800")
+        popup.configure(bg="white")
+        
+        # Center popup
+        popup.transient(self.content_frame.winfo_toplevel())
+        popup.grab_set()
+        
+        # Main frame
+        main_frame = tk.Frame(popup, bg="white")
+        main_frame.pack(fill="both", expand=True, padx=20, pady=20)
+        main_frame.columnconfigure(0, weight=2)
+        main_frame.columnconfigure(1, weight=1)
+        main_frame.rowconfigure(0, weight=1)
+        
+        # Left panel - Image
+        image_frame = tk.LabelFrame(main_frame, text="Biểu đồ", bg="white", fg="#374151", font=("Arial", 12, "bold"))
+        image_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 10))
+        image_frame.columnconfigure(0, weight=1)
+        image_frame.rowconfigure(0, weight=1)
+        
+        # Load full size image
+        try:
+            full_image = Image.open(chart['path'])
+            # Resize to fit popup but maintain aspect ratio
+            max_width, max_height = 800, 600
+            image_width, image_height = full_image.size
+            
+            # Calculate new size maintaining aspect ratio
+            ratio = min(max_width/image_width, max_height/image_height)
+            new_width = int(image_width * ratio)
+            new_height = int(image_height * ratio)
+            
+            resized_image = full_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            popup_photo = ImageTk.PhotoImage(resized_image)
+            
+            # Create scrollable canvas for large images
+            canvas = tk.Canvas(image_frame, bg="white")
+            scrollbar_v = ttk.Scrollbar(image_frame, orient="vertical", command=canvas.yview)
+            scrollbar_h = ttk.Scrollbar(image_frame, orient="horizontal", command=canvas.xview)
+            
+            canvas.configure(yscrollcommand=scrollbar_v.set, xscrollcommand=scrollbar_h.set)
+            
+            # Add image to canvas
+            canvas.create_image(0, 0, anchor="nw", image=popup_photo)
+            canvas.configure(scrollregion=canvas.bbox("all"))
+            
+            # Pack widgets
+            canvas.grid(row=0, column=0, sticky="nsew")
+            scrollbar_v.grid(row=0, column=1, sticky="ns")
+            scrollbar_h.grid(row=1, column=0, sticky="ew")
+            
+            # Keep reference to prevent garbage collection
+            canvas.image = popup_photo
+            
+        except Exception as e:
+            error_label = tk.Label(image_frame, text=f"Lỗi load ảnh: {e}", bg="white", fg="red")
+            error_label.grid(row=0, column=0, sticky="nsew")
+        
+        # Right panel - Information
+        info_frame = tk.LabelFrame(main_frame, text="Thông tin biểu đồ", bg="white", fg="#374151", font=("Arial", 12, "bold"))
+        info_frame.grid(row=0, column=1, sticky="nsew")
+        info_frame.columnconfigure(0, weight=1)
+        
+        # Create scrollable text area
+        text_frame = tk.Frame(info_frame, bg="white")
+        text_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
+        text_frame.columnconfigure(0, weight=1)
+        text_frame.rowconfigure(0, weight=1)
+        
+        text_widget = tk.Text(text_frame, wrap="word", bg="white", fg="#374151", 
+                            font=("Arial", 10), padx=10, pady=10)
+        scrollbar_text = ttk.Scrollbar(text_frame, orient="vertical", command=text_widget.yview)
+        text_widget.configure(yscrollcommand=scrollbar_text.set)
+        
+        # Get chart information
+        chart_info = self._get_chart_information(chart['name'])
+        
+        # Insert information
+        text_widget.insert("1.0", chart_info)
+        text_widget.config(state="disabled")
+        
+        text_widget.grid(row=0, column=0, sticky="nsew")
+        scrollbar_text.grid(row=0, column=1, sticky="ns")
+        
+        # Close button
+        close_btn = tk.Button(main_frame, text="Đóng", command=popup.destroy, 
+                            bg="#ef4444", fg="white", font=("Arial", 10, "bold"),
+                            padx=20, pady=5, cursor="hand2")
+        close_btn.grid(row=1, column=0, columnspan=2, pady=(10, 0))
+    
+    def _get_chart_information(self, chart_name):
+        """Lấy thông tin chi tiết về biểu đồ"""
+        info = f"📊 TÊN BIỂU ĐỒ: {chart_name}\n\n"
+        
+        # Chart descriptions based on filename
+        chart_descriptions = {
+            "avg_math_eng_lit_by_hometown.png": {
+                "title": "So sánh điểm trung bình theo quê quán",
+                "description": "Biểu đồ so sánh điểm trung bình của 3 môn học (Toán, Văn, Tiếng Anh) theo từng tỉnh/thành phố.",
+                "insights": [
+                    "• Thể hiện sự khác biệt về chất lượng giáo dục giữa các vùng miền",
+                    "• Giúp xác định tỉnh/thành có kết quả học tập tốt nhất",
+                    "• Phân tích xu hướng điểm số theo địa lý"
+                ]
+            },
+            "rank_home_town_by_english_avg.png": {
+                "title": "Xếp hạng tỉnh/thành theo điểm Tiếng Anh",
+                "description": "Bảng xếp hạng các tỉnh/thành phố theo điểm trung bình môn Tiếng Anh từ thấp đến cao.",
+                "insights": [
+                    "• Xác định vùng có trình độ Tiếng Anh tốt nhất",
+                    "• Phân tích khoảng cách giáo dục giữa các vùng",
+                    "• Hỗ trợ hoạch định chính sách giáo dục"
+                ]
+            },
+            "rank_home_town_by_math_avg.png": {
+                "title": "Xếp hạng tỉnh/thành theo điểm Toán",
+                "description": "Bảng xếp hạng các tỉnh/thành phố theo điểm trung bình môn Toán từ thấp đến cao.",
+                "insights": [
+                    "• Đánh giá năng lực toán học theo vùng miền",
+                    "• Xác định vùng cần hỗ trợ về giáo dục Toán",
+                    "• Phân tích chất lượng dạy học môn Toán"
+                ]
+            },
+            "rank_home_town_by_literature_avg.png": {
+                "title": "Xếp hạng tỉnh/thành theo điểm Văn",
+                "description": "Bảng xếp hạng các tỉnh/thành phố theo điểm trung bình môn Văn từ thấp đến cao.",
+                "insights": [
+                    "• Đánh giá năng lực ngôn ngữ và văn học",
+                    "• Phân tích chất lượng giáo dục nhân văn",
+                    "• Xác định vùng có thế mạnh về Văn học"
+                ]
+            },
+            "scores_by_age_groups.png": {
+                "title": "So sánh điểm số theo nhóm tuổi",
+                "description": "Biểu đồ so sánh điểm trung bình của các môn học theo nhóm tuổi (16-17, 18-19, 20+).",
+                "insights": [
+                    "• Phân tích tác động của tuổi tác đến kết quả học tập",
+                    "• Xác định nhóm tuổi có kết quả tốt nhất",
+                    "• Hỗ trợ thiết kế chương trình học phù hợp"
+                ]
+            },
+            "score_trend_by_age.png": {
+                "title": "Xu hướng điểm số theo tuổi",
+                "description": "Biểu đồ đường thể hiện xu hướng thay đổi điểm số theo độ tuổi của học sinh.",
+                "insights": [
+                    "• Phân tích mối tương quan giữa tuổi và điểm số",
+                    "• Xác định độ tuổi tối ưu cho học tập",
+                    "• Dự đoán xu hướng kết quả học tập"
+                ]
+            },
+            "score_distribution_by_age.png": {
+                "title": "Phân phối điểm số theo nhóm tuổi",
+                "description": "Biểu đồ box plot thể hiện phân phối điểm số của từng môn học theo nhóm tuổi.",
+                "insights": [
+                    "• Phân tích độ phân tán điểm số trong từng nhóm tuổi",
+                    "• Xác định outliers và học sinh đặc biệt",
+                    "• So sánh tính ổn định điểm số giữa các nhóm"
+                ]
+            },
+            "top_bottom_students_comparison.png": {
+                "title": "So sánh học sinh xuất sắc và yếu kém",
+                "description": "Biểu đồ tổng hợp so sánh đặc điểm của Top 10% và Bottom 10% học sinh.",
+                "insights": [
+                    "• Phân tích sự khác biệt giữa học sinh giỏi và yếu",
+                    "• Xác định yếu tố ảnh hưởng đến kết quả học tập",
+                    "• Hỗ trợ xây dựng chiến lược giáo dục cá biệt hóa"
+                ]
+            },
+            "top_bottom_radar_chart.png": {
+                "title": "Biểu đồ radar so sánh điểm từng môn",
+                "description": "Biểu đồ radar thể hiện điểm trung bình từng môn học của Top 10% và Bottom 10%.",
+                "insights": [
+                    "• So sánh thế mạnh/yếu của từng nhóm học sinh",
+                    "• Xác định môn học có sự phân hóa lớn nhất",
+                    "• Hỗ trợ xây dựng chương trình bồi dưỡng phù hợp"
+                ]
+            }
+        }
+        
+        chart_info = chart_descriptions.get(chart_name, {
+            "title": "Biểu đồ phân tích dữ liệu",
+            "description": "Biểu đồ được tạo từ dữ liệu phân tích học sinh.",
+            "insights": ["• Biểu đồ cung cấp thông tin chi tiết về dữ liệu học sinh"]
+        })
+        
+        info += f"📋 MÔ TẢ:\n{chart_info['description']}\n\n"
+        info += f"💡 INSIGHTS:\n"
+        for insight in chart_info['insights']:
+            info += f"{insight}\n"
+        
+        info += f"\n📁 ĐƯỜNG DẪN:\n{os.path.join(self.data_dir, chart_name)}\n\n"
+        info += f"📊 DỮ LIỆU:\n"
+        info += f"• Tổng số học sinh: {self.report_data.get('total_students', 0)}\n"
+        info += f"• Điểm TB tổng: {self.report_data.get('avg_score', 0):.2f}\n"
+        info += f"• Điểm TB Toán: {self.report_data.get('math_avg', 0):.2f}\n"
+        info += f"• Điểm TB Văn: {self.report_data.get('literature_avg', 0):.2f}\n"
+        info += f"• Điểm TB Tiếng Anh: {self.report_data.get('english_avg', 0):.2f}\n"
+        
+        return info
