@@ -3,7 +3,7 @@ Simple API client for communicating with the backend server.
 Centralizes all network calls so views don't import requests directly.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 import requests
 
@@ -67,6 +67,17 @@ def update_student_grades(student_code: str, grades: Dict[str, Any]) -> Dict[str
 def get_statistics() -> Dict[str, Any]:
     """Lấy thống kê tổng quan về học sinh"""
     response = requests.get(f"{API_BASE_URL}/students/statistics", timeout=API_TIMEOUT)
+    response.raise_for_status()
+    return response.json()
+
+
+def login(username: str, password: str) -> Dict[str, Any]:
+    """Đăng nhập với username/email và password"""
+    payload = {
+        "username": username,
+        "password": password
+    }
+    response = requests.post(f"{API_BASE_URL}/students/login", json=payload, timeout=API_TIMEOUT)
     response.raise_for_status()
     return response.json()
 

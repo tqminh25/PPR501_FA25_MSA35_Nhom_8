@@ -2,9 +2,9 @@
 Login Model - Chứa business logic cho authentication
 """
 
-import time
 from typing import Tuple
 from config.constants import API_BASE_URL, VALID_USERNAME, VALID_PASSWORD
+from models.api_client import login
 
 
 class LoginModel:
@@ -15,17 +15,25 @@ class LoginModel:
     
     def authenticate(self, username: str, password: str) -> Tuple[bool, str]:
         """
-        Giả lập API call để xác thực
+        Gọi API thực sự để xác thực
         Returns: (success: bool, message: str)
         """
-        # Giả lập network delay
-        time.sleep(0.5)
-        
-        # API simulation: chỉ usertest/123456 thành công
-        if username == VALID_USERNAME and password == VALID_PASSWORD:
-            return True, "Đăng nhập thành công"
-        else:
-            return False, "Tên đăng nhập hoặc mật khẩu không đúng"
+        try:
+            # Gọi API login thực sự
+            response = login(username, password)
+            
+            if response.get("success", False):
+                return True, response.get("message", "Đăng nhập thành công")
+            else:
+                return False, response.get("message", "Tên đăng nhập hoặc mật khẩu không đúng")
+                
+        except Exception as e:
+            # Fallback về logic cũ nếu API lỗi
+            print(f"API Error: {e}, falling back to local validation")
+            if username == VALID_USERNAME and password == VALID_PASSWORD:
+                return True, "Đăng nhập thành công (offline mode)"
+            else:
+                return False, "Tên đăng nhập hoặc mật khẩu không đúng"
     
     def validate_credentials(self, username: str, password: str) -> Tuple[bool, str]:
         """Validate input trước khi gọi API"""

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from ..db import SessionLocal, Base, engine
 from .. import schemas, crud
 
@@ -124,3 +125,37 @@ def update_student_grades(student_code: str, grades: schemas.StudentGradesUpdate
     db.commit()
     db.refresh(student)
     return student
+
+@router.post("/login", response_model=schemas.LoginResponse)
+def login(login_data: schemas.LoginRequest, db: Session = Depends(get_db)):
+    """API đăng nhập - chỉ cần username/email đúng, password bất kỳ"""
+    try:
+        # Tìm user theo username hoặc email
+        user = db.query(crud.models.Student).filter(
+            or_(
+                crud.models.Student.student_code == login_data.username,
+                crud.models.Student.email == login_data.username
+            )
+        ).first()
+        
+        if user:
+            # User tồn tại - đăng nhập thành công (bỏ qua password)
+            return schemas.LoginResponse(
+                success=True,
+                message="Đăng nhập thành công",
+                user_id=user.id,
+                username=user.student_code,
+                email=user.email
+            )
+        else:
+            # User không tồn tại
+            return schemas.LoginResponse(
+                success=False,
+                message="Tên đăng nhập hoặc email không tồn tại"
+            )
+            
+    except Exception as e:
+        return schemas.LoginResponse(
+            success=False,
+            message=f"Lỗi đăng nhập: {str(e)}"
+        )

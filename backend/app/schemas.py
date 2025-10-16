@@ -23,3 +23,16 @@ class StudentGradesUpdate(BaseModel):
     math_score: Optional[float] = Field(None, ge=0, le=10)
     literature_score: Optional[float] = Field(None, ge=0, le=10)
     english_score: Optional[float] = Field(None, ge=0, le=10)
+
+class LoginRequest(BaseModel):
+    """Schema cho request đăng nhập"""
+    username: str  # Có thể là username hoặc email
+    password: str
+
+class LoginResponse(BaseModel):
+    """Schema cho response đăng nhập"""
+    success: bool
+    message: str
+    user_id: Optional[int] = None
+    username: Optional[str] = None
+    email: Optional[str] = None
