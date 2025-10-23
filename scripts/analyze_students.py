@@ -84,44 +84,37 @@ def _load_from_csv(path: str) -> pd.DataFrame:
 def _load_from_txt(path: str) -> pd.DataFrame:
     """
     Parse lines like:
-    [id=1] 94600 | Tran Ha | email=... | dob=... | home_town=BacNinh | math=6.4 | lit=6.1 | eng=3.2
+    94600 | Ha Tran | ha.tran13@gmail.com | 2005-03-20 | BacNinh | 7.5 | 6.2 | 6.2
     """
     rows: List[Dict[str, Any]] = []
-    pat = re.compile(
-        r"""\[id=(?P<id>\d+)\]\s*
-            (?P<student_code>\d+)\s*\|\s*
-            (?P<last_name>\w+)\s+(?P<first_name>\w+)\s*\|\s*
-            email=(?P<email>[^|]+)\|\s*
-            dob=(?P<dob>[^|]+)\|\s*
-            home_town=(?P<home_town>[^|]+)\|\s*
-            math=(?P<math>[^|]+)\|\s*
-            lit=(?P<lit>[^|]+)\|\s*
-            eng=(?P<eng>.+)$
-        """,
-        re.VERBOSE,
-    )
+    
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith("#"):
                 continue
-            m = pat.match(line)
-            if not m:
+                
+            parts = [p.strip() for p in line.split('|')]
+            if len(parts) < 8:
                 continue
-            d = m.groupdict()
-            rows.append(
-                {
-                    "student_code": d["student_code"].strip(),
-                    "first_name": d["first_name"].strip(),
-                    "last_name": d["last_name"].strip(),
-                    "email": d["email"].strip(),
-                    "dob": d["dob"].strip(),
-                    "home_town": d["home_town"].strip(),
-                    "math_score": _to_float(d["math"]),
-                    "literature_score": _to_float(d["lit"]),
-                    "english_score": _to_float(d["eng"]),
-                }
-            )
+                
+            # Tách tên
+            name_parts = parts[1].split()
+            if len(name_parts) < 2:
+                continue
+                
+            rows.append({
+                "student_code": parts[0],
+                "first_name": name_parts[1],
+                "last_name": name_parts[0],
+                "email": parts[2],
+                "dob": parts[3],
+                "home_town": parts[4],
+                "math_score": _to_float(parts[5]),
+                "literature_score": _to_float(parts[6]),
+                "english_score": _to_float(parts[7])
+            })
+    
     return pd.DataFrame(rows)
 
 
@@ -214,6 +207,10 @@ def plot_avg_scores(df_clean: pd.DataFrame, out_dir: str):
 def plot_sorted_bars(group: pd.DataFrame, out_dir: str):
     os.makedirs(out_dir, exist_ok=True)
     outputs = []
+    
+    # Lọc bỏ các giá trị null và đảm bảo home_town là string
+    group = group.dropna(subset=['home_town'])
+    group['home_town'] = group['home_town'].astype(str)
 
     # English
     g_eng = group.sort_values("avg_eng", ascending=True).reset_index(drop=True)
@@ -276,17 +273,6 @@ def main():
         print("Không thể import analyze_by_age.py")
     except Exception as e:
         print(f"Lỗi khi chạy phân tích tuổi: {e}")
-
-
-if __name__ == "__main__":
-    main()
-
-    df = load_students_df()
-    df_clean = clean_students(df)
-    # Export
-    export_clean(df_clean, DATA_DIR)
-    # Plot
-    chart_path = plot_avg_scores(df_clean, DATA_DIR)
 
 
 if __name__ == "__main__":
