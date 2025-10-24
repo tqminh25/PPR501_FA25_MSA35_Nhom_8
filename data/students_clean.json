@@ -6,22 +6,10 @@
     "email":"ha.tran13@gmail.com",
     "dob":"2005-03-20",
     "home_town":"BacNinh",
-    "math_score":6.4,
-    "literature_score":6.1,
-    "english_score":3.2,
+    "math_score":7.5,
+    "literature_score":6.2,
+    "english_score":6.2,
     "id":1
-  },
-  {
-    "student_code":"194601",
-    "first_name":"Ha",
-    "last_name":"Ngo",
-    "email":"ha.ngo79@gmail.com",
-    "dob":"2000-09-21",
-    "home_town":"HCM",
-    "math_score":8.0,
-    "literature_score":5.2,
-    "english_score":8.2,
-    "id":2
   },
   {
     "student_code":"194602",
@@ -30,7 +18,7 @@
     "email":"trang.dang87@gmail.com",
     "dob":"1999-12-28",
     "home_town":"HaNoi",
-    "math_score":7.8,
+    "math_score":7.9,
     "literature_score":8.6,
     "english_score":8.8,
     "id":3
@@ -82,18 +70,6 @@
     "literature_score":9.6,
     "english_score":5.1,
     "id":7
-  },
-  {
-    "student_code":"194607",
-    "first_name":"Dung",
-    "last_name":"Ly",
-    "email":"dung.ly90@gmail.com",
-    "dob":"2000-12-18",
-    "home_town":"QuangNinh",
-    "math_score":9.4,
-    "literature_score":6.8,
-    "english_score":4.3,
-    "id":8
   },
   {
     "student_code":"194608",
@@ -1198,5 +1174,53 @@
     "literature_score":8.3,
     "english_score":8.9,
     "id":100
+  },
+  {
+    "student_code":"binh",
+    "first_name":"pham",
+    "last_name":"gekk",
+    "email":"binh@gmaill.com",
+    "dob":null,
+    "home_town":"Ha noi",
+    "math_score":7.0,
+    "literature_score":9.0,
+    "english_score":10.0,
+    "id":131
+  },
+  {
+    "student_code":"12345",
+    "first_name":"binh 2",
+    "last_name":"pham",
+    "email":"binhpd2@gmail.com",
+    "dob":"1992-10-13",
+    "home_town":"bac ninh",
+    "math_score":9.0,
+    "literature_score":9.0,
+    "english_score":9.0,
+    "id":132
+  },
+  {
+    "student_code":"1003",
+    "first_name":"binh3",
+    "last_name":"pham",
+    "email":"binh3@gmail.com",
+    "dob":"1992-10-14",
+    "home_town":"thuan thanh",
+    "math_score":5.0,
+    "literature_score":5.0,
+    "english_score":5.0,
+    "id":133
+  },
+  {
+    "student_code":"binh4",
+    "first_name":"binh4",
+    "last_name":"pham",
+    "email":"binh4@gmail.com",
+    "dob":"2025-10-15",
+    "home_town":null,
+    "math_score":7.0,
+    "literature_score":8.0,
+    "english_score":9.0,
+    "id":134
   }
 ]

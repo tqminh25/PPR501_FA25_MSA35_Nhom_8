@@ -158,7 +158,6 @@ def export_clean(df_clean: pd.DataFrame, out_dir: str):
     # TXT: simple, one-line per record
     txt_path = os.path.join(out_dir, "students_clean.txt")
     with open(txt_path, "w", encoding="utf-8") as f:
-        f.write(f"# Clean rows: {len(df_clean)}\n")
         cols = ["student_code", "first_name", "last_name", "email", "dob", "home_town", "math_score", "literature_score", "english_score"]
         for _, row in df_clean[cols].iterrows():
             f.write(

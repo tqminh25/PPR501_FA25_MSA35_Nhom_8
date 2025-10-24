@@ -41,15 +41,34 @@ def _load_from_txt(path: str) -> pd.DataFrame:
     
     return pd.DataFrame(rows)
 
+def clean_students(df: pd.DataFrame) -> pd.DataFrame:
+    # Ensure numeric columns
+    for col in ["math_score", "literature_score", "english_score"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+    before = len(df)
+    df_clean = df.dropna(subset=["math_score", "literature_score", "english_score"]).copy()
+    after = len(df_clean)
+    print(f"Dropped {before - after} rows due to missing values in score columns.")
+    return df_clean
+
+
 def _to_float(x: Any):
     try:
         return float(str(x).strip())
     except Exception:
         return np.nan
 
+def export_clean(df_clean: pd.DataFrame, out_dir: str):
+    os.makedirs(out_dir, exist_ok=True)
+    txt_path = os.path.join(out_dir, "students_clean.txt")
+    with open(txt_path, "w", encoding="utf-8") as f:
+        
+
 def main():
     txt = os.path.join(DATA_DIR, "students_raw.txt")
     df = _load_from_txt(txt)
+    df_clean = clean_students(df)
+
     print(df)
 
 if __name__ == "__main__":

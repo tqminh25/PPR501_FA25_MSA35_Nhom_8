@@ -53,10 +53,8 @@ FONTS = {
 
 # Menu Items
 MENU_ITEMS = [
-    ("📊", "Dashboard", "dashboard"),
     ("👥", "Quản lý học sinh", "students"),
     ("📝", "Quản lý điểm", "grades"),
-    ("📚", "Quản lý lớp học", "classes"),
     ("📋", "Báo cáo", "reports"),
     ("🚪", "Đăng xuất", "logout"),
 ]

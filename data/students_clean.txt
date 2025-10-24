@@ -1,12 +1,10 @@
-# Clean rows: 100
-94600 | Tran Ha | ha.tran13@gmail.com | 2005-03-20 | BacNinh | math=6.4 | lit=6.1 | eng=3.2
-194601 | Ngo Ha | ha.ngo79@gmail.com | 2000-09-21 | HCM | math=8.0 | lit=5.2 | eng=8.2
-194602 | Dang Trang | trang.dang87@gmail.com | 1999-12-28 | HaNoi | math=7.8 | lit=8.6 | eng=8.8
+# Clean rows: 102
+94600 | Tran Ha | ha.tran13@gmail.com | 2005-03-20 | BacNinh | math=7.5 | lit=6.2 | eng=6.2
+194602 | Dang Trang | trang.dang87@gmail.com | 1999-12-28 | HaNoi | math=7.9 | lit=8.6 | eng=8.8
 194603 | Pham Linh | linh.pham67@gmail.com | 2006-01-31 | QuangNinh | math=6.4 | lit=9.3 | eng=3.4
 194604 | Ngo Huy | huy.ngo64@gmail.com | 2002-02-12 | NgheAn | math=6.4 | lit=6.1 | eng=6.6
 194605 | Tran Anh | anh.tran58@gmail.com | 2001-11-10 | HCM | math=6.8 | lit=6.7 | eng=8.1
 194606 | Ngo Minh | minh.ngo68@gmail.com | 2001-09-04 | NamDinh | math=5.6 | lit=9.6 | eng=5.1
-194607 | Ly Dung | dung.ly90@gmail.com | 2000-12-18 | QuangNinh | math=9.4 | lit=6.8 | eng=4.3
 194608 | Nguyen Anh | anh.nguyen94@gmail.com | 2006-01-16 | HaiPhong | math=8.9 | lit=9.9 | eng=9.7
 194609 | Tran My | my.tran58@gmail.com | 2000-08-25 | CanTho | math=7.3 | lit=9.2 | eng=8.3
 194610 | Pham Thao | thao.pham95@gmail.com | 2005-07-14 | CanTho | math=8.5 | lit=8.4 | eng=8.7
@@ -99,3 +97,7 @@
 194697 | Vu Trang | trang.vu51@gmail.com | 2002-12-05 | NgheAn | math=8.8 | lit=6.9 | eng=6.9
 194698 | Phan My | my.phan42@gmail.com | 2002-10-19 | LamDong | math=5.4 | lit=5.1 | eng=4.1
 194699 | Pham Thao | thao.pham93@gmail.com | 2001-07-23 | HCM | math=8.9 | lit=8.3 | eng=8.9
+binh | gekk pham | binh@gmaill.com | None | Ha noi | math=7.0 | lit=9.0 | eng=10.0
+12345 | pham binh 2 | binhpd2@gmail.com | 1992-10-13 | bac ninh | math=9.0 | lit=9.0 | eng=9.0
+1003 | pham binh3 | binh3@gmail.com | 1992-10-14 | thuan thanh | math=5.0 | lit=5.0 | eng=5.0
+binh4 | pham binh4 | binh4@gmail.com | 2025-10-15 | None | math=7.0 | lit=8.0 | eng=9.0
